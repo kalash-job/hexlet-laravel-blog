@@ -17,11 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('/');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+Route::get('/about', 'App\Http\Controllers\PageController@about')->name('about');
 
-Route::get('/articles', function () {
-    $articles = App\Models\Article::All();
-    return view('articles', ['articles' => $articles]);
-})->name('articles.index');
+Route::get('/articles', 'App\Http\Controllers\ArticleController@article')->name('articles.index');
