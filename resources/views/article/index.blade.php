@@ -3,9 +3,10 @@
 @section('title', 'Статьи')
 
 @section('content')
-    <h1>Статьи</h1>
+    <h1>Список статей</h1>
     @foreach($articles as $article)
         <h2>{{$article->name}}</h2>
-        <div>{{$article->body}}</div>
+        <div>{{Str::limit($article->body, 200)}}</div>
     @endforeach
+    {{ $articles->links() }}
 @endsection

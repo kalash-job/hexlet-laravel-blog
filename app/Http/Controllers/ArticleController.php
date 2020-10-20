@@ -9,7 +9,7 @@ class ArticleController extends Controller
 {
     public function article()
     {
-        $articles = Article::All();
-        return view('article.articles', ['articles' => $articles]);
+        $articles = Article::paginate(3);
+        return view('article.index', compact('articles'));
     }
 }
