@@ -4,20 +4,8 @@
 
 @section('content')
     <h1>Добавление статьи</h1>
-    @if ($errors->any())
-        <div>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     {{ Form::model($article, ['url' => route('articles.store')]) }}
-    {{ Form::label('name', 'Название') }}
-    {{ Form::text('name') }}<br>
-    {{ Form::label('body', 'Содержание') }}
-    {{ Form::textarea('body') }}<br>
+    @include('article.form')
     {{ Form::submit('Создать') }}
     {{ Form::close() }}
 @endsection

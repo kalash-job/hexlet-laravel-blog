@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogPost;
 use Illuminate\Http\Request;
 use App\Models\Article;
 
@@ -25,15 +26,27 @@ class ArticleController extends Controller
         return view('article.create', compact('article'));
     }
 
-    public function store(Request $request)
+    public function store(StoreBlogPost $request)
     {
-        $data = $this->validate($request, [
-            'name' => 'required|unique:articles',
-            'body' => 'required|min:300',
-        ]);
+        $data = $request->validated();
         $article = new Article();
         $article->fill($data);
         $article->save();
         return redirect()->route('articles.index')->with('status', 'New article has been successfully added!');
+    }
+
+    public function edit($id)
+    {
+        $article = Article::findOrFail($id);
+        return view('article.edit', compact('article'));
+    }
+
+    public function update(StoreBlogPost $request, $id)
+    {
+        $article = Article::findOrFail($id);
+        $data = $request->validated();
+        $article->fill($data);
+        $article->save();
+        return redirect()->route('articles.index')->with('status', 'The article has been successfully updated!');
     }
 }
