@@ -6,4 +6,9 @@
     <h1>{{$article->name}}</h1>
     <div>{{$article->body}}</div>
     <small><a href="{{ route('articles.edit', ['id' => $article->id]) }}">Редактировать статью</a></small>
+    <small>
+        <a href="{{ route('articles.destroy', ['id' => $article->id]) }}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">
+            Удалить статью
+        </a>
+    </small>
 @endsection
