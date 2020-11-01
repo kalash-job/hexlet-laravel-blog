@@ -23,13 +23,13 @@ class StoreBlogPost extends FormRequest
      */
     public function rules()
     {
-        $id = $this->route()->parameter('id');
+        $id = $this->route()->originalParameters();
         $rules = [
             'name' => 'required|unique:articles',
             'body' => 'required|min:300',
         ];
         if ($this->route()->named('articles.update')) {
-            $rules['name'] .= ",name, {$id}";
+            $rules['name'] .= ",name, {$id['article']}";
         }
         return $rules;
     }
